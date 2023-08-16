@@ -3,3 +3,5 @@ __pycache__
 spiders/__pycache__
 # CSV sheets
 *.csv
+# Scraper Outpu
+firmwares

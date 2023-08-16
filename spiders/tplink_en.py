@@ -6,6 +6,7 @@ import urllib.parse, urllib.request
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from download_firmware import parse_link
 from vendor_links import TPLINK_EN
 
 class TPLink_enSpider(Spider):
@@ -47,4 +48,4 @@ class TPLink_enSpider(Spider):
         else:
             download_link = firmware_container.css(DOWNLOAD_LINK_SELECTOR2)[0].attrib["href"].replace(" ", "%20")
 
-        urllib.request.urlretrieve(download_link, f"{response.meta['model_name']}.zip")
+        parse_link(download_link, "tplink_en", response.meta["model_name"])
