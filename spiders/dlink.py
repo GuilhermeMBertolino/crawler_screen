@@ -25,7 +25,6 @@ class DlinkSpider(Spider):
             )
     
     def parse_model(self, response):
-        print("oioioioioi\n\n\n")
         LINK_SELECTOR = ".fileDownload::text"
 
         firmware = response.css(LINK_SELECTOR)
