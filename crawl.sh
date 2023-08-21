@@ -16,7 +16,7 @@ done
 
 if [ -n "$1" ] && [ -e "./firmwares/$1.py" ]; then
     echo "Crawling $1 website ..."
-    scrapy runspider spiders/$1.py
+    scrapy runspider spiders/$1.py --nolog
     echo "Done"
     clear
     return 0
@@ -26,11 +26,13 @@ elif [ -n "$1" ]; then
 fi
 
 for file in ./spiders/*.py; do
+    vendor=$(basename ${file%.*})
+    echo "$vendor"
     if [ ! -d "firmwares/$(basename "$file")" ]; then
         mkdir firmwares/$(basename "$file")
     fi
     echo "Crawling $(basename "$file") website ..."
-    scrapy runspider $file
+    scrapy runspider $file --nolog
     clear
 done
 
