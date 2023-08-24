@@ -3,5 +3,11 @@ __pycache__
 spiders/__pycache__
 # CSV sheets
 *.csv
-# Scraper Outpu
+# Scraper Output
 firmwares/*
+
+# package-lock
+cypress/package-lock.json
+
+#node modules
+cypress/node_modules
