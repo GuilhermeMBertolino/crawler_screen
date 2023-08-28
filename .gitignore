@@ -5,3 +5,5 @@ spiders/__pycache__
 *.csv
 # Scraper Outpu
 firmwares/*
+# Cypress
+cypress
