@@ -7,3 +7,5 @@ spiders/__pycache__
 firmwares/*
 # Cypress
 cypress
+# Browser logs
+*.log
