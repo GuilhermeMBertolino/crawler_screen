@@ -5,5 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as Ec
 
 opt = webdriver.FirefoxOptions()
-# opt.add_argument("-headless")
+opt.add_argument("-headless")
+opt.log.level = "error"
+
 driver = webdriver.Firefox(options=opt)
+driver.implicitly_wait(5)

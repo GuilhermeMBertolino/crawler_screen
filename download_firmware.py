@@ -3,4 +3,5 @@ import os, sys
 
 def parse_link(url, vendor, model):
     url.replace(" ", "%20")
-    urllib.request.urlretrieve(url, f"./firmwares/{vendor}/{model}.zip")
+    extension = url[url.rfind(".") + 1:]
+    urllib.request.urlretrieve(url, f"./firmwares/{vendor}/{model}.{extension}")

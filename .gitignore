@@ -1,11 +1,13 @@
 # Python cache
 __pycache__
 spiders/__pycache__
-# CSV sheets
-*.csv
-# Scraper Outpu
+# Scraper Output
 firmwares/*
 # Cypress
 cypress
 # Browser logs
 *.log
+# Local archives
+*.txt
+*.html
+*.csv

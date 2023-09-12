@@ -7,7 +7,7 @@ import urllib.parse, urllib.request
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from browser_webdriver import driver, By, Ec, WebDriverWait
+from browser_webdriver import driver, By
 from download_firmware import parse_link
 from vendor_links import INTELBRAS
 
@@ -26,7 +26,10 @@ class IntelbrasSpider(Spider):
         # Wait for element to be clickable
         sleep(1)
         driver.find_element(By.XPATH, "//div[text()='Qual produto?']").click()
-        print(driver.find_element(By.XPATH, "//div[contains(text(), 'WRN 300')]"))
+        routers = driver.find_element(By.CLASS_NAME, "css-11unzgr").find_elements(By.XPATH, "*")
+        print(routers)
+        for router in routers:
+            print(router.text)
 
     def parse_model(self, response):
         pass
