@@ -11,7 +11,7 @@ from vendor_links import NETGEAR
 
 class NetgearSpider(Spider):
     name = "netgear-spider"
-    start_urls = NETGEAR
+    start_urls = [NETGEAR]
 
     def parse(self, response):
         pass

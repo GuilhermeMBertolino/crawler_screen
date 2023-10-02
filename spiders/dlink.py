@@ -30,7 +30,7 @@ class DlinkSpider(Spider):
             )
     
     def parse_model(self, response):
-        LINK_REGEX_PATTERN = r"https://.*?Firmware.*?\.zip|https://.*?Firmware.*?\.rar|https://.*Firmware.*?\.bin"
+        LINK_REGEX_PATTERN = r"https://.*?Firmware.*?\.(bin|zip|rar)"
 
         driver.get(response.url)
         download_link = re.search(LINK_REGEX_PATTERN, driver.page_source, re.IGNORECASE)
