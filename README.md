@@ -11,3 +11,8 @@ If you want to run only a specific crawler, try to run the script with a paramet
 ```
     ./crawl.sh dlink
 ```
+
+## Code conventions for project
+
+* Every selector used for filtering html pages must be made with xpath
+* Every message sent by the spider must be sent using the logging library
