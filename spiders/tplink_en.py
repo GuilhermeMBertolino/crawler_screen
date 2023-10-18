@@ -22,7 +22,7 @@ class TPLink_enSpider(Spider):
         routers_2 = response.xpath(ROUTER_5G_SELECTOR)
         models = routers_1.xpath(MODEL_SELECTOR) + (routers_2.xpath(MODEL_SELECTOR))
 
-        self.logger.info(f"Starting crawling of {len(models)} pages")
+        self.logger.info(f"Starting crawling {len(models)} pages")
 
         for model in models:
             page_link = model.xpath("@href").extract_first()
@@ -48,10 +48,8 @@ class TPLink_enSpider(Spider):
         
         if(firmware_container.xpath(DOWNLOAD_LINK_SELECTOR1)):
             download_link = firmware_container.xpath(DOWNLOAD_LINK_SELECTOR1).xpath("@href").extract_first()
-            print(download_link)
         else:
             download_link = firmware_container.xpath(DOWNLOAD_LINK_SELECTOR2).xpath("@href").extract_first()
-            print(download_link)
 
         self.logger.info(f"Downloading firmware for {response.meta['model_name']}")
         parse_link(download_link, "tplink_en", response.meta["model_name"])

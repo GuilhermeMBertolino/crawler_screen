@@ -23,6 +23,8 @@ class DlinkSpider(Spider):
         # MODEL_SELECTOR = ".aRedirect::text"
         lines = response.xpath(LINE_SELECTOR)
         
+        self.logger.info(f"Start crawling {len(lines)} pages")
+
         for line in lines:
             model = line.xpath(MODEL_SELECTOR).extract_first()
             yield Request(
@@ -38,4 +40,8 @@ class DlinkSpider(Spider):
         download_link = re.search(LINK_REGEX_PATTERN, driver.page_source, re.IGNORECASE)
 
         if download_link:
+            self.logger.info(f"Downloading firmware for {response.meta['model_name']}")
             parse_link(download_link.group(), "dlink", response.meta["model_name"])
+
+        else:
+            self.logger.info(f"No firmware available for {response.meta['model_name']}")
