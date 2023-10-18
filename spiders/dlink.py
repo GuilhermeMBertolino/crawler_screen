@@ -17,12 +17,14 @@ class DlinkSpider(Spider):
     start_urls = [urllib.parse.urljoin(DLINK, "/AllPro.aspx")]
 
     def parse(self, response):
-        LINE_SELECTOR = "table tr"
-        MODEL_SELECTOR = ".aRedirect::text"
-        lines = response.css(LINE_SELECTOR)
-
+        LINE_SELECTOR = "//table//tr"
+        # LINE_SELECTOR = "table tr"
+        MODEL_SELECTOR = ".//*[contains(@class, 'aRedirect')]/text()"
+        # MODEL_SELECTOR = ".aRedirect::text"
+        lines = response.xpath(LINE_SELECTOR)
+        
         for line in lines:
-            model = line.css(MODEL_SELECTOR).extract_first()
+            model = line.xpath(MODEL_SELECTOR).extract_first()
             yield Request(
                 url=urllib.parse.urljoin(DLINK, f"/ProductInfo.aspx?m={model}"),
                 meta={"model_name": model},
@@ -37,4 +39,3 @@ class DlinkSpider(Spider):
 
         if download_link:
             parse_link(download_link.group(), "dlink", response.meta["model_name"])
-
