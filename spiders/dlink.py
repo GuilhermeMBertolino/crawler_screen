@@ -1,7 +1,6 @@
 import scrapy
 from scrapy import Spider
 from scrapy import Request
-from time import sleep
 import sys, os
 import urllib.parse
 import re
@@ -18,9 +17,7 @@ class DlinkSpider(Spider):
 
     def parse(self, response):
         LINE_SELECTOR = "//table//tr"
-        # LINE_SELECTOR = "table tr"
         MODEL_SELECTOR = ".//*[contains(@class, 'aRedirect')]/text()"
-        # MODEL_SELECTOR = ".aRedirect::text"
         lines = response.xpath(LINE_SELECTOR)
         
         self.logger.info(f"Start crawling {len(lines)} pages")
