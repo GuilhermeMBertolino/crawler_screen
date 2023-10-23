@@ -7,6 +7,7 @@ import re
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from browser_webdriver import driver, By
 from download_firmware import parse_link
 from vendor_links import NETGEAR
 
@@ -21,7 +22,7 @@ class NetgearSpider(Spider):
 
         self.logger.info(f"Start crawling {len(products)} pages")
 
-        for product in products:
+        for product in products :
             model = product.xpath(MODEL_SELECTOR).extract_first()
             model_code = re.search(r"\((.*?)\)", model).group()[1:-1]
             yield Request(
@@ -31,4 +32,16 @@ class NetgearSpider(Spider):
             )
 
     def parse_model(self, response):
-        pass
+        FIRMWARE_LINK_SELECTOR = "//p[contains(text(), 'Firmware')]/.."      
+
+        driver.get(response.url)
+        download_link = driver.find_element(By.XPATH, FIRMWARE_LINK_SELECTOR)
+
+        if download_link:
+            self.logger.info(f"Downloading firmware for {response.meta['model_name']}")
+            parse_link(download_link.get_attribute("href"), "netgear", response.meta["model_name"])
+
+        else:
+            self.logger.info(f"No firmware available for {response.meta['model_name']}")
+
+        

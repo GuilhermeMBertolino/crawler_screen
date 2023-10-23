@@ -7,7 +7,7 @@ import re
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from browser_webdriver import driver, By, Ec, WebDriverWait
+from browser_webdriver import driver
 from download_firmware import parse_link
 from vendor_links import DLINK
 
