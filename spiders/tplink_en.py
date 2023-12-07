@@ -42,11 +42,11 @@ class TPLink_enSpider(Spider):
 
         firmware_container = response.xpath(FIRMWARE_CONTAINER_SELECTOR)
 
-        if(not firmware_container):
+        if not firmware_container:
             self.logger.info(f"No firmware available for {response.meta['model_name']}")
             return
         
-        if(firmware_container.xpath(DOWNLOAD_LINK_SELECTOR1)):
+        if firmware_container.xpath(DOWNLOAD_LINK_SELECTOR1):
             download_link = firmware_container.xpath(DOWNLOAD_LINK_SELECTOR1).xpath("@href").extract_first()
         else:
             download_link = firmware_container.xpath(DOWNLOAD_LINK_SELECTOR2).xpath("@href").extract_first()

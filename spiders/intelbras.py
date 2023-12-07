@@ -16,7 +16,6 @@ class IntelbrasSpider(Spider):
     start_urls = [INTELBRAS]
 
     def parse(self, response):
-        driver.implicitly_wait(5)
         driver.get(response.url)
         driver.find_element(By.CLASS_NAME, "cc-dismiss").click()
         driver.find_element(By.XPATH, "//div[text()='Qual tipo de produto?']").click()
@@ -24,12 +23,12 @@ class IntelbrasSpider(Spider):
         driver.find_element(By.XPATH, "//div[text()='Qual categoria?']").click()
         driver.find_element(By.XPATH, "//div[text()='Roteadores']").click()
         # Wait for element to be clickable
-        sleep(1)
+        sleep(5)
         driver.find_element(By.XPATH, "//div[text()='Qual produto?']").click()
         routers = driver.find_element(By.CLASS_NAME, "css-11unzgr").find_elements(By.XPATH, "*")
-        print(routers)
-        for router in routers:
-            print(router.text)
+        routers[0].click()
+        # for router in routers:
+        #     print(router.text)
 
     def parse_model(self, response):
         pass
