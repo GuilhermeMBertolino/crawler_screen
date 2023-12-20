@@ -22,7 +22,7 @@ class NetgearSpider(Spider):
 
         self.logger.info(f"Start crawling {len(products)} pages")
 
-        for product in products :
+        for product in products:
             model = product.xpath(MODEL_SELECTOR).extract_first()
             model_code = re.search(r"\((.*?)\)", model).group()[1:-1]
             yield Request(
