@@ -1,6 +1,6 @@
 # Python cache
 __pycache__
-spiders/__pycache__
+*/__pycache__
 # Scraper Output
 firmwares/*
 # Cypress
