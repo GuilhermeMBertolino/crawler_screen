@@ -18,6 +18,22 @@ If you want to run only a specific crawler, try to run the script with a paramet
     ./crawl.sh dlink
 ```
 
+# Run crawler on Docker container
+
+If you are not using linux, you will probably need to run the crawler in a docker container, to do so, you must have Docker and docker-compose installed in your machine, you can get them from the [official website](https://www.docker.com/get-started/). Once you have docker installed you can build the image running the following code from the crawler folder:
+
+```
+    docker-compose build
+```
+
+To run the image, just run:
+
+```
+    docker-compose --rm up
+```
+
+Once you are done, the container will be deleted.
+
 ## Code conventions for project
 
 * Every selector used for filtering html pages must be made with xpath
