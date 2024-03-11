@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+    crawler:
+        build:
+          context: .
+          dockerfile: Dockerfile_crawler
+        stdin_open: true
+        tty: true
+        image: crawler-screen
+        container_name: crawler-screen
+        volumes:
+            - ./firmwares:/crawler/firmwares

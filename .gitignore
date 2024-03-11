@@ -3,8 +3,6 @@ __pycache__
 */__pycache__
 # Scraper Output
 firmwares/*
-# Cypress
-cypress
 # Browser logs
 *.log
 # Local archives

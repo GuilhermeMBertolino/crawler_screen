@@ -1,0 +1,9 @@
+FROM python:3
+
+WORKDIR /crawler/
+
+COPY . /crawler/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["crawl.sh", "mercusys"]

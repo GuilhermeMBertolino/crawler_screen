@@ -1,0 +1,16 @@
+# Python cache
+__pycache__
+*/__pycache__
+# Previously downloaded firmwares
+firmwares/*
+# Browser logs
+*.log
+# Local archives
+*.html
+*.csv
+# Readme
+README.md
+# Dlink crawler causing issues ):
+spiders/dlink.py
+spiders/asus.py
+browser_webdriver.py
