@@ -11,6 +11,3 @@ firmwares/*
 # Readme
 README.md
 # Dlink crawler causing issues ):
-spiders/dlink.py
-spiders/asus.py
-browser_webdriver.py
