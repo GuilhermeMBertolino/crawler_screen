@@ -10,3 +10,20 @@ services:
         container_name: crawler-screen
         volumes:
             - ./firmwares:/crawler/firmwares
+        networks:
+          screen:
+            ipv4_address: 192.168.150.2
+
+    splash:
+      image: scrapinghub/splash
+      container_name: splash-browser
+      networks:
+        screen:
+          ipv4_address: 192.168.150.3
+
+networks:
+  screen:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.150.0/24
