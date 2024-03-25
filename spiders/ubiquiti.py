@@ -2,12 +2,14 @@ import scrapy
 from scrapy import Spider
 from scrapy import Request
 from scrapy_selenium import SeleniumRequest
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 import sys, os
 import urllib.parse, urllib.request
+import re
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from browser_webdriver import By, WebDriverWait, TimeoutException, EC
 from download_firmware import parse_link
 from vendor_links import UBIQUITI
 
@@ -34,19 +36,13 @@ class UbiquitiSpider(Spider):
             )
 
     def parse_model(self, response):
+        LINK_REGEX_PATTERN = r'https:.[^"]*?Firmware.[^"]*?\.(?:zip|bin|rar)'
 
-        FIRMWARE_BAR_SELECTOR = "//h6[text()='firmware']"
-        DOWNLOAD_LINK_SELECTOR = "//a[starts-with(@href, 'https://fw-download.ubnt.com')]/@href"
+        download_link = re.search(LINK_REGEX_PATTERN, response.body.decode("utf-8"), re.IGNORECASE)
 
-        firmware_bar = response.xpath(FIRMWARE_BAR_SELECTOR)
-
-        if not firmware_bar:
+        if download_link:
+            self.logger.info(f"Downloading firmware for {response.meta['model_name']}")
+            parse_link(download_link.group(), "ubiquiti", response.meta["model_name"])
+        else:
             self.logger.info(f"No firmware available for {response.meta['model_name']}")
-            return
-        
-        download_link = response.xpath(DOWNLOAD_LINK_SELECTOR).extract_first()
-        print(download_link)
-
-        self.logger.info(f"Downloading firmware for {response.meta['model_name']}")
-
         

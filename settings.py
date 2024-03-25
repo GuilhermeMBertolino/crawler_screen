@@ -8,13 +8,10 @@ HTTPERROR_ALLOWED_CODES = [404]
 
 SELENIUM_DRIVER_NAME = 'chrome'
 SELENIUM_DRIVER_EXECUTABLE_PATH = None
-SELENIUM_DRIVER_ARGUMENTS=['-headless']  
-
-# SELENIUM_DRIVER_NAME = 'firefox'
-# SELENIUM_DRIVER_EXECUTABLE_PATH = which('geckodriver')
-# SELENIUM_DRIVER_ARGUMENTS=['--headless']  
+SELENIUM_DRIVER_ARGUMENTS=['-headless']
 
 SPLASH_URL = 'http://192.168.150.3:8050'
+
 DOWNLOADER_MIDDLEWARES = {
     'scrapy_splash.SplashCookiesMiddleware': 723,
     'scrapy_splash.SplashMiddleware': 725,
