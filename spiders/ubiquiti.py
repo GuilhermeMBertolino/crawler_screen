@@ -1,13 +1,13 @@
 import scrapy
 from scrapy import Spider
 from scrapy import Request
-from scrapy_splash import SplashRequest
-
+from scrapy_selenium import SeleniumRequest
 import sys, os
 import urllib.parse, urllib.request
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from browser_webdriver import By, WebDriverWait, TimeoutException, EC
 from download_firmware import parse_link
 from vendor_links import UBIQUITI
 
@@ -25,16 +25,16 @@ class UbiquitiSpider(Spider):
 
         for router in routers:
             model = router.xpath(MODEL_SELECTOR).extract_first()
-            yield SplashRequest(
+            yield SeleniumRequest(
                 url=f"https://ui.com/download/software/{model.lower()}",
                 callback=self.parse_model,
+                wait_time=5,
+                wait_until=EC.invisibility_of_element_located((By.CLASS_NAME, 'react-loading-skeleton')),
                 meta={"model_name": model},
-                args={"wait": 5}
             )
 
     def parse_model(self, response):
 
-        print(response.text)
         FIRMWARE_BAR_SELECTOR = "//h6[text()='firmware']"
         DOWNLOAD_LINK_SELECTOR = "//a[starts-with(@href, 'https://fw-download.ubnt.com')]/@href"
 
