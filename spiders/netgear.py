@@ -2,14 +2,12 @@ import scrapy
 from scrapy import Spider
 from scrapy import Request
 from scrapy_selenium import SeleniumRequest
-from selenium.webdriver.common.by import By
 import sys, os
 import urllib.parse, urllib.request
 import re
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from browser_webdriver import driver, By
 from download_firmware import parse_link
 from vendor_links import NETGEAR
 
