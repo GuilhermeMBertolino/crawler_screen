@@ -31,7 +31,15 @@ def extractRootFS(image, vendor, model, depth=0, max_depth=10):
                     unix = findRootFS(dirname)
                     if unix[0]:
                         print("Unix fs found at", unix[1])
-                        shutil.move(unix[1], os.path.abspath(output_dir))
+                        if not os.path.exists(output_dir):
+                            os.makedirs(output_dir)
+                        for root, dir, files in os.walk(unix[1]):
+                            for name in dir + files:
+                                path = os.path.join(root, name)
+                                if not os.path.islink(path):
+                                    new_path = os.path.join(output_dir, os.path.relpath(path, unix[1]))
+                                    os.makedirs(os.path.dirname(new_path), exist_ok=True)
+                                    shutil.move(path, new_path)
                         return True
                     else:
                         print("No unix fs found")
@@ -40,7 +48,6 @@ def extractRootFS(image, vendor, model, depth=0, max_depth=10):
                 for root, dir, files in os.walk(dirname):
                     for filename in files:
                         if any(ext in filename for ext in file_extensions):
-                            print(filename)
                             extractRootFS(os.path.join(root, filename), vendor, model, depth, max_depth)
                 break
 
