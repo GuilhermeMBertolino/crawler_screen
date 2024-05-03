@@ -27,3 +27,7 @@ def findRootFS(start, max_depth=10):
         if count > max_subdirs:
             max_subdirs = count
             max_dir = path
+
+    if max_subdirs >= UNIX_THRESHOLD:
+        return (True, max_dir)
+    return (False, max_dir)

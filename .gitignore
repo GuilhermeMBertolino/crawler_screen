@@ -3,9 +3,12 @@ __pycache__
 */__pycache__
 # Scraper Output
 firmwares/*
+# Extractor Output
+extractor/extracted/*
 # Browser logs
 *.log
 # Local archives
 *.txt
 *.html
 *.csv
+*.zip
