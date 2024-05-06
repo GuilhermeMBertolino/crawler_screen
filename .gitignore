@@ -12,3 +12,5 @@ extractor/extracted/*
 *.html
 *.csv
 *.zip
+*.ZIP
+*.rar

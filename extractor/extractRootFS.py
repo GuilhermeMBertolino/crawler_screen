@@ -44,11 +44,15 @@ def extractRootFS(image, vendor, model, depth=0, max_depth=10):
                     else:
                         print("No unix fs found")
                 break
-            elif ("archive" in desc or "compressed" in desc) and any(ext in desc for ext in file_extensions):
+        
+        for entry in module.results:
+            if "archive" in desc or "compressed" in desc:
                 for root, dir, files in os.walk(dirname):
                     for filename in files:
-                        if any(ext in filename for ext in file_extensions):
-                            extractRootFS(os.path.join(root, filename), vendor, model, depth, max_depth)
+                        dirname = os.path.join(root, filename)
+                        if os.path.isfile(dirname):
+                            print(dirname, depth)
+                            extractRootFS(dirname, vendor, model, depth, max_depth)
                 break
 
         return False   
