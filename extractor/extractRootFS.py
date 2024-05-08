@@ -25,7 +25,7 @@ def extractRootFS(image, vendor, model, depth=0, max_depth=10):
         for entry in module.results:
             desc = entry.description
             dirname = module.extractor.directory
-            if "filesystem" in desc:
+            if "filesystem" in desc or "archive" in desc or "compressed" in desc:
                 print("Extracting filesystem")
                 if dirname:
                     unix = findRootFS(dirname)

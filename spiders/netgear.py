@@ -2,6 +2,8 @@ import scrapy
 from scrapy import Spider
 from scrapy import Request
 from scrapy_selenium import SeleniumRequest
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 import sys, os
 import urllib.parse, urllib.request
 import re
@@ -30,7 +32,8 @@ class NetgearSpider(Spider):
                 url=urllib.parse.urljoin(NETGEAR, f"/support/download/?model={model_code}"),
                 meta={"model_name": model_code},
                 callback=self.parse_model,
-                wait_time=2
+                wait_time=5,
+                wait_until=EC.presence_of_element_located((By.CLASS_NAME, "search_results"))
             )
 
     def parse_model(self, response):
